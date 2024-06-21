@@ -19,7 +19,7 @@ ExploreDK utilizes LLMs to enhance user interaction and trip planning. Natural L
 ## Possible Tech Stack:
 - **Backend:** Python, FastAPI, SQLAlchemy, PostgreSQL
 - **Frontend:** HTML5, CSS3, JavaScript (React), Bootstrap, Mapbox (for interactive maps)
-- **AI/ML:** OpenAI's GPT-4 for natural language processing, Weather APIs for real-time updates
+- **AI/ML:** LangChain for working with LLMs, Weather APIs for real-time updates
 - **Deployment:** Docker, AWS (Amazon Web Services) for hosting, Nginx for web server
 
 ## Detailed Implementation:
@@ -33,12 +33,12 @@ ExploreDK utilizes LLMs to enhance user interaction and trip planning. Natural L
 1. **LLM for Personalized Recommendations:**
    - **Input:** User queries in natural language.
    - **Output:** Personalized trail and camping recommendations.
-   - **Tools:** OpenAI's GPT-4 API.
+   - **Tools:** LangChain library.
 
 2. **LLM for Sentiment and Trend Analysis:**
    - **Input:** User reviews, social media posts.
    - **Output:** Current trail conditions, popular spots, detected issues.
-   - **Tools:** OpenAI's GPT-4 API.
+   - **Tools:** LangChain library.
 
 ### Backend Integration:
 1. **FastAPI Setup:**
