@@ -36,4 +36,6 @@ async def get_questions() -> dict:
 
 @app.get("/database")
 async def get_database_info() -> str:
+    load_dotenv()
+
     return generate_recommendations()

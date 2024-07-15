@@ -6,6 +6,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain.output_parsers import PydanticOutputParser
 from langchain_community.utilities import SQLDatabase
 from langchain.chains.sql_database.query import create_sql_query_chain
+from langchain_community.tools import QuerySQLDataBaseTool
 
 from langchain_openai import ChatOpenAI
 
@@ -39,5 +40,19 @@ def generate_questions() -> QuestionList:
 
 def generate_recommendations():
     db = SQLDatabase.from_uri("sqlite:///database/campsites.db")
+    model = ChatOpenAI(model="gpt-3.5-turbo-0125", api_key=os.getenv("OPENAI_SECRET"))
 
-    return db.get_table_info()
+    def clean(query: str) -> str:
+        return query.replace(";", "")
+
+    execute_query = QuerySQLDataBaseTool(db=db)
+    write_query = create_sql_query_chain(model, db)
+
+    chain = write_query | clean | execute_query
+    result = chain.invoke(
+        {
+            "question": "Provide me a list of 5 campsites who are an ocffmember and have atleast 4 stars. Order by stars desc. Include name, adress and website."
+        }
+    )
+
+    return result
